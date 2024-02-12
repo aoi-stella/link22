@@ -1,3 +1,5 @@
 <resources>
     <string name="title_activity_main">AppRootActivity</string>
+    <string name="nav_destination_timeline">timeline</string>
+    <string name="nav_destination_setting">setting</string>
 </resources>

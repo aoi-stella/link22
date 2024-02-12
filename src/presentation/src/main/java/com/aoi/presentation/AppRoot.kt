@@ -10,6 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.aoi.presentation.ui.theme.Link22Theme
 
 class AppRootActivity : ComponentActivity() {
@@ -35,6 +39,24 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
+}
+
+@Composable
+fun GlobalBottomNavigation(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController = rememberNavController(),
+    startDestination: String = R.string.nav_destination_timeline.toString()
+){
+    NavHost(
+        modifier = modifier,
+        navController = navHostController,
+        startDestination = startDestination
+    ){
+        composable(R.string.nav_destination_timeline.toString()){
+            //TODO: Add timeline screen
+        }
+        //TODO: Add other screens
+    }
 }
 
 @Preview(showBackground = true)
