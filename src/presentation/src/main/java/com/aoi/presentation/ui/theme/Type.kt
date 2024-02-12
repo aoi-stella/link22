@@ -1,4 +1,4 @@
-package com.aoi.link22.ui.theme
+package com.aoi.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -19,3 +19,5 @@ include(":presentation")
 include(":domain")
 include(":data")
 include(":util")
+
+include(":app", "presentation")
