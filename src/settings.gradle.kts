@@ -15,3 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "link22"
 include(":app")
+include(":presentation")
+include(":domain")
+include(":data")
+include(":util")
