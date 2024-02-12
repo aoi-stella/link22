@@ -3,19 +3,39 @@ package com.aoi.presentation.approot
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aoi.presentation.R
 import com.aoi.presentation.approot.ui.theme.Link22Theme
+import com.aoi.presentation.settings.Settings
+import com.aoi.presentation.timeline.Timeline
 
 class AppRootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,13 +47,18 @@ class AppRootActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    BottomNavigationBar()
                 }
             }
         }
     }
 }
 
+data class BottomNavigationItem(
+    val title: String,
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector,
+)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -43,21 +68,60 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun GlobalBottomNavigation(
+fun BottomNavigationBar(
     modifier: Modifier = Modifier,
-    navHostController: NavHostController = rememberNavController(),
-    startDestination: String = R.string.nav_destination_timeline.toString()
+    navController: NavHostController = rememberNavController()
 ){
-    NavHost(
-        modifier = modifier,
-        navController = navHostController,
-        startDestination = startDestination
-    ){
-        composable(R.string.nav_destination_timeline.toString()){
-            //TODO: Add timeline screen
-        }
-        //TODO: Add other screens
+    val items = listOf(
+        BottomNavigationItem(
+            title = R.string.nav_destination_timeline.toString(),
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home
+        ),
+        BottomNavigationItem(
+            title = R.string.nav_destination_setting.toString(),
+            selectedIcon = Icons.Filled.Settings,
+            unselectedIcon = Icons.Outlined.Settings))
+    var selectedItemIndex by rememberSaveable{
+        mutableIntStateOf(0)
     }
+    Scaffold(
+        bottomBar = {
+            NavigationBar{
+                items.forEachIndexed { index, item ->
+                    NavigationBarItem(selected = selectedItemIndex == index,
+                        onClick = {
+                            selectedItemIndex = index
+                            navController.navigate(item.title)
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon,
+                                contentDescription = null
+                            )
+                        }
+                    )
+                }
+            }
+        }
+    ){
+        innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)){
+            Text(text ="Hello")
+            NavHost(navController = navController, startDestination = R.string.nav_destination_timeline.toString()){
+                composable(R.string.nav_destination_timeline.toString()){
+                    Timeline()
+                }
+                composable(R.string.nav_destination_setting.toString()){
+                    Settings()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
 }
 
 @Preview(showBackground = true)
