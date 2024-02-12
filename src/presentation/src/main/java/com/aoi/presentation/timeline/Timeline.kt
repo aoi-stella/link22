@@ -22,7 +22,7 @@ class Timeline : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting2("Android")
+                    Timeline("Android")
                 }
             }
         }
@@ -30,7 +30,7 @@ class Timeline : ComponentActivity() {
 }
 
 @Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
+fun Timeline(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
@@ -41,6 +41,6 @@ fun Greeting2(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview2() {
     Link22Theme {
-        Greeting2("Android")
+        Timeline("Android")
     }
 }
