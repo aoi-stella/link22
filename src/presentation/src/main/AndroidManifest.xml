@@ -3,6 +3,11 @@
 
     <application>
         <activity
+            android:name=".settings.Settings"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.Link22" />
+        <activity
             android:name=".timeline.Timeline"
             android:exported="false"
             android:label="@string/title_activity_timeline"
