@@ -1,4 +1,4 @@
-package com.aoi.presentation.ui.theme
+package com.aoi.presentation.approot.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

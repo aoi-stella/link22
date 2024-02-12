@@ -1,4 +1,4 @@
-package com.aoi.presentation.ui.theme
+package com.aoi.presentation.approot.ui.theme
 
 import android.app.Activity
 import android.os.Build

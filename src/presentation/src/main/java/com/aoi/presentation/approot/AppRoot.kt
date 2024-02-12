@@ -1,4 +1,4 @@
-package com.aoi.presentation
+package com.aoi.presentation.approot
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,7 +14,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.aoi.presentation.ui.theme.Link22Theme
+import com.aoi.presentation.R
+import com.aoi.presentation.approot.ui.theme.Link22Theme
 
 class AppRootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
