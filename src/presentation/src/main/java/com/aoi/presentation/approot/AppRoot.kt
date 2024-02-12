@@ -20,21 +20,19 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.aoi.presentation.R
 import com.aoi.presentation.approot.ui.theme.Link22Theme
 import com.aoi.presentation.settings.Settings
 import com.aoi.presentation.timeline.Timeline
 import com.aoi.util.entity.BottomNavigationItem
 
+//TODO: 後でハードコーディングの箇所を修正する
 class AppRootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,31 +64,43 @@ fun BottomNavigationBar(
 ){
     val items = listOf(
         BottomNavigationItem(
-            title = R.string.nav_destination_timeline.toString(),
+            title = "timeline",
+            route = "timeline",
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home
         ),
         BottomNavigationItem(
-            title = R.string.nav_destination_setting.toString(),
+            title = "settings",
+            route = "settings",
             selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings))
-    var selectedItemIndex by rememberSaveable{
-        mutableIntStateOf(0)
-    }
+            unselectedIcon = Icons.Outlined.Settings)
+    )
+
     Scaffold(
         bottomBar = {
             NavigationBar{
-                items.forEachIndexed { index, item ->
-                    NavigationBarItem(selected = selectedItemIndex == index,
+                // NavControllerの現在のバックスタックエントリをリアクティブに監視
+                val currentBackStackEntry by navController.currentBackStackEntryAsState()
+                // 現在のルートを取得
+                val currentRoute = currentBackStackEntry?.destination?.route
+                items.forEach {
+                    item ->
+                    NavigationBarItem(
+                        selected = currentRoute == item.route,
                         onClick = {
-                            selectedItemIndex = index
-                            navController.navigate(item.title)
+                            navController.navigate(item.route){
+                                launchSingleTop = true
+                                restoreState = true
+                            }
                         },
                         icon = {
                             Icon(
-                                imageVector = if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon,
+                                imageVector = if (currentRoute == item.route) item.selectedIcon else item.unselectedIcon,
                                 contentDescription = null
                             )
+                        },
+                        label = {
+                            Text(text = item.title)
                         }
                     )
                 }
@@ -99,13 +109,12 @@ fun BottomNavigationBar(
     ){
         innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)){
-            Text(text ="Hello")
-            NavHost(navController = navController, startDestination = R.string.nav_destination_timeline.toString()){
-                composable(R.string.nav_destination_timeline.toString()){
-                    Timeline()
+            NavHost(navController = navController, startDestination = "timeline"){
+                composable("timeline"){
+                    Timeline("aa", modifier)
                 }
-                composable(R.string.nav_destination_setting.toString()){
-                    Settings()
+                composable("settings"){
+                    Settings("vv", modifier)
                 }
             }
         }
