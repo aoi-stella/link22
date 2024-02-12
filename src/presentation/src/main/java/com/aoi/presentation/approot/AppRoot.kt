@@ -36,6 +36,7 @@ import com.aoi.presentation.R
 import com.aoi.presentation.approot.ui.theme.Link22Theme
 import com.aoi.presentation.settings.Settings
 import com.aoi.presentation.timeline.Timeline
+import com.aoi.util.entity.BottomNavigationItem
 
 class AppRootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,12 +54,6 @@ class AppRootActivity : ComponentActivity() {
         }
     }
 }
-
-data class BottomNavigationItem(
-    val title: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
-)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(

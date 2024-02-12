@@ -21,3 +21,4 @@ include(":data")
 include(":util")
 
 include(":app", "presentation")
+include(":presentation", "util")
