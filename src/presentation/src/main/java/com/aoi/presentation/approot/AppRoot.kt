@@ -33,6 +33,11 @@ import com.aoi.presentation.timeline.Timeline
 import com.aoi.util.entity.BottomNavigationItem
 
 //TODO: 後でハードコーディングの箇所を修正する
+
+/**
+ * AppRootActivity
+ * アプリケーションのルートとなるActivity
+ */
 class AppRootActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,12 @@ class AppRootActivity : ComponentActivity() {
     }
 }
 
+/**
+ * BottomNavigationBar
+ * ボトムナビゲーションバー
+ * @param modifier Modifier
+ * @param navController NavHostController
+ */
 @Composable
 fun BottomNavigationBar(
     modifier: Modifier = Modifier,
@@ -114,9 +125,13 @@ fun BottomNavigationBar(
     }
 }
 
+/**
+ * Preview
+ * プレビュー
+ */
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun Preview() {
     Link22Theme {
         BottomNavigationBar()
     }
