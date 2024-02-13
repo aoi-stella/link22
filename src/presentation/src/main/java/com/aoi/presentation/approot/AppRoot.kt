@@ -49,13 +49,6 @@ class AppRootActivity : ComponentActivity() {
         }
     }
 }
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Composable
 fun BottomNavigationBar(
@@ -125,6 +118,6 @@ fun BottomNavigationBar(
 @Composable
 fun GreetingPreview() {
     Link22Theme {
-        Greeting("Android")
+        BottomNavigationBar()
     }
 }
