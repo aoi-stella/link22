@@ -19,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -130,7 +131,8 @@ class AppRootActivity : ComponentActivity() {
                 ) {
                     Text(
                         text = title,
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             },
@@ -156,6 +158,7 @@ class AppRootActivity : ComponentActivity() {
         navController: NavHostController = rememberNavController(),
         items: List<BottomNavigationItem>
     ){
+        //TODO: ナビゲーションアイテム切り替え時の挙動が少し重い
         NavigationBar{
             // NavControllerの現在のバックスタックエントリをリアクティブに監視
             val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -164,6 +167,9 @@ class AppRootActivity : ComponentActivity() {
             items.forEach {
                     item ->
                 NavigationBarItem(
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = MaterialTheme.colorScheme.primary,
+                    ),
                     selected = currentRoute == item.route,
                     onClick = {
                         navController.navigate(item.route){
