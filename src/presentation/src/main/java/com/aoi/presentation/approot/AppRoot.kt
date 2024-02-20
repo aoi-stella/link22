@@ -135,6 +135,7 @@ class AppRootActivity : ComponentActivity() {
                 }
             },
             navigationIcon = {
+                //TODO: 若干アイコン左側過ぎない？
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Navigation Icon",
