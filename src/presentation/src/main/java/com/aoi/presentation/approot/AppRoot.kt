@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -73,7 +72,7 @@ class AppRootActivity : ComponentActivity() {
     fun Screen(
         modifier: Modifier = Modifier
     ){
-        var navController = rememberNavController()
+        val navController = rememberNavController()
         val items = listOf(
             BottomNavigationItem(
                 title = getString(R.string.nav_destination_timeline),
