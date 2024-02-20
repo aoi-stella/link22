@@ -27,12 +27,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.aoi.presentation.R
 import com.aoi.presentation.approot.ui.theme.Link22Theme
 import com.aoi.presentation.settings.Settings
 import com.aoi.presentation.timeline.Timeline
 import com.aoi.util.entity.BottomNavigationItem
-
-//TODO: 後でハードコーディングの箇所を修正する
 
 /**
  * AppRootActivity
@@ -67,14 +66,14 @@ class AppRootActivity : ComponentActivity() {
     ){
         val items = listOf(
             BottomNavigationItem(
-                title = "timeline",
-                route = "timeline",
+                title = getString(R.string.nav_destination_timeline),
+                route = getString(R.string.nav_destination_timeline),
                 selectedIcon = Icons.Filled.Home,
                 unselectedIcon = Icons.Outlined.Home
             ),
             BottomNavigationItem(
-                title = "settings",
-                route = "settings",
+                title = getString(R.string.nav_destination_setting),
+                route = getString(R.string.nav_destination_setting),
                 selectedIcon = Icons.Filled.Settings,
                 unselectedIcon = Icons.Outlined.Settings)
         )
@@ -112,11 +111,11 @@ class AppRootActivity : ComponentActivity() {
         ){
                 innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)){
-                NavHost(navController = navController, startDestination = "timeline"){
-                    composable("timeline"){
+                NavHost(navController = navController, startDestination = getString(R.string.nav_destination_timeline)){
+                    composable(getString(R.string.nav_destination_timeline)){
                         Timeline("aa", modifier)
                     }
-                    composable("settings"){
+                    composable(getString(R.string.nav_destination_setting)){
                         Settings("vv", modifier)
                     }
                 }
