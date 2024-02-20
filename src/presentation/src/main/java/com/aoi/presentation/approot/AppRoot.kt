@@ -53,86 +53,86 @@ class AppRootActivity : ComponentActivity() {
             }
         }
     }
-}
 
-/**
- * BottomNavigationBar
- * ボトムナビゲーションバー
- * @param modifier Modifier
- * @param navController NavHostController
- */
-@Composable
-fun BottomNavigationBar(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
-){
-    val items = listOf(
-        BottomNavigationItem(
-            title = "timeline",
-            route = "timeline",
-            selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home
-        ),
-        BottomNavigationItem(
-            title = "settings",
-            route = "settings",
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings)
-    )
+    /**
+     * BottomNavigationBar
+     * ボトムナビゲーションバー
+     * @param modifier Modifier
+     * @param navController NavHostController
+     */
+    @Composable
+    fun BottomNavigationBar(
+        modifier: Modifier = Modifier,
+        navController: NavHostController = rememberNavController()
+    ){
+        val items = listOf(
+            BottomNavigationItem(
+                title = "timeline",
+                route = "timeline",
+                selectedIcon = Icons.Filled.Home,
+                unselectedIcon = Icons.Outlined.Home
+            ),
+            BottomNavigationItem(
+                title = "settings",
+                route = "settings",
+                selectedIcon = Icons.Filled.Settings,
+                unselectedIcon = Icons.Outlined.Settings)
+        )
 
-    Scaffold(
-        bottomBar = {
-            NavigationBar{
-                // NavControllerの現在のバックスタックエントリをリアクティブに監視
-                val currentBackStackEntry by navController.currentBackStackEntryAsState()
-                // 現在のルートを取得
-                val currentRoute = currentBackStackEntry?.destination?.route
-                items.forEach {
-                    item ->
-                    NavigationBarItem(
-                        selected = currentRoute == item.route,
-                        onClick = {
-                            navController.navigate(item.route){
-                                launchSingleTop = true
-                                restoreState = true
+        Scaffold(
+            bottomBar = {
+                NavigationBar{
+                    // NavControllerの現在のバックスタックエントリをリアクティブに監視
+                    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+                    // 現在のルートを取得
+                    val currentRoute = currentBackStackEntry?.destination?.route
+                    items.forEach {
+                            item ->
+                        NavigationBarItem(
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route){
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = if (currentRoute == item.route) item.selectedIcon else item.unselectedIcon,
+                                    contentDescription = null
+                                )
+                            },
+                            label = {
+                                Text(text = item.title)
                             }
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = if (currentRoute == item.route) item.selectedIcon else item.unselectedIcon,
-                                contentDescription = null
-                            )
-                        },
-                        label = {
-                            Text(text = item.title)
-                        }
-                    )
+                        )
+                    }
                 }
             }
-        }
-    ){
-        innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)){
-            NavHost(navController = navController, startDestination = "timeline"){
-                composable("timeline"){
-                    Timeline("aa", modifier)
-                }
-                composable("settings"){
-                    Settings("vv", modifier)
+        ){
+                innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)){
+                NavHost(navController = navController, startDestination = "timeline"){
+                    composable("timeline"){
+                        Timeline("aa", modifier)
+                    }
+                    composable("settings"){
+                        Settings("vv", modifier)
+                    }
                 }
             }
         }
     }
-}
 
-/**
- * Preview
- * プレビュー
- */
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    Link22Theme {
-        BottomNavigationBar()
+    /**
+     * Preview
+     * プレビュー
+     */
+    @Preview(showBackground = true)
+    @Composable
+    fun Preview() {
+        Link22Theme {
+            BottomNavigationBar()
+        }
     }
 }
