@@ -103,7 +103,7 @@ class AppRootActivity : ComponentActivity() {
             Box(modifier = Modifier.padding(innerPadding)){
                 NavHost(navController = navController, startDestination = getString(R.string.nav_destination_timeline)){
                     composable(getString(R.string.nav_destination_timeline)){
-                        Timeline("aa", modifier)
+                        Timeline()
                     }
                     composable(getString(R.string.nav_destination_setting)){
                         Settings("vv", modifier)
