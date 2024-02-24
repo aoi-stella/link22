@@ -44,26 +44,27 @@ fun Timeline() {
                     fontSize = 24.sp,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
+                        .padding(0.dp, 0.dp, 0.dp, 10.dp)
                 )
                 Divider(
                     modifier = Modifier
-                        .height(2.5.dp)
+                        .height(1.25.dp)
                         .fillParentMaxWidth(.5f)
                         .background(Color.Gray)
                         .align(Alignment.CenterHorizontally)
-                        .padding(vertical = 10.dp) // 上下の余白
                 )
                 Text(
                     text = "Albabat, Kasseika, Kuiper: New Ransomware Gangs Rise with Rust and Golang",
-                    maxLines = 2,
+                    maxLines = 5,
                     overflow = TextOverflow.Ellipsis,
-                    fontSize = 20.sp,
+                    fontSize = 16.sp,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
+                        .padding(0.dp, 10.dp, 0.dp, 0.dp)
                 )
                 Text(
                     text = "Post: 1/31/2024",
-                    fontSize = 16.sp,
+                    fontSize = 12.sp,
                     modifier = Modifier
                         .align(Alignment.End)
                 )
