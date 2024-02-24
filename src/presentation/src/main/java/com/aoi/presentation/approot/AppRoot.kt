@@ -106,7 +106,7 @@ class AppRootActivity : ComponentActivity() {
                         Timeline()
                     }
                     composable(getString(R.string.nav_destination_setting)){
-                        Settings("vv", modifier)
+                        Settings()
                     }
                 }
             }
