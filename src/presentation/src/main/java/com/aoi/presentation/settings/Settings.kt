@@ -20,14 +20,14 @@ fun Settings() {
             .fillMaxWidth()
     ){
         item {
-            appSection()
+            AppSection()
         }
 
     }
 }
 
 @Composable
-private fun appSection(){
+private fun AppSection(){
     Column(modifier = Modifier
         .fillMaxWidth()
     ){
@@ -39,13 +39,13 @@ private fun appSection(){
             color = MaterialTheme.colorScheme.primary,
             style = TextStyle(fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
         )
-        displayItem("Build Version", "1.0.0")
-        displayItem("Developer", "aoi")
+        DisplayItem("Build Version", "1.0.0")
+        DisplayItem("Developer", "aoi")
     }
 }
 
 @Composable
-private fun displayItem(header: String, content: String){
+private fun DisplayItem(header: String, content: String){
     Column(modifier = Modifier
         .fillMaxWidth()
     ){
