@@ -13,6 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aoi.presentation.settings.ui.theme.Link22Theme
 
+/**
+ * Settings
+ * 設定画面
+ */
 @Composable
 fun Settings() {
     LazyColumn(
@@ -26,6 +30,10 @@ fun Settings() {
     }
 }
 
+/**
+ * AppSection
+ * アプリケーションについてのセクション
+ */
 @Composable
 private fun AppSection(){
     Column(modifier = Modifier
@@ -44,6 +52,12 @@ private fun AppSection(){
     }
 }
 
+/**
+ * DisplayItem
+ * 表示項目
+ * @param header String
+ * @param content String
+ */
 @Composable
 private fun DisplayItem(header: String, content: String){
     Column(modifier = Modifier
@@ -68,6 +82,10 @@ private fun DisplayItem(header: String, content: String){
     }
 }
 
+/**
+ * Preview
+ * プレビュー
+ */
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
