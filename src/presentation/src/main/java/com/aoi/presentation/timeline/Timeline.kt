@@ -76,7 +76,7 @@ fun Timeline() {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview2() {
+fun Preview() {
     Link22Theme {
         Timeline()
     }
