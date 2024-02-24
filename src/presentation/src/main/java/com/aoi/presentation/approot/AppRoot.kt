@@ -67,12 +67,9 @@ class AppRootActivity : ComponentActivity() {
     /**
      * Screen
      * 画面描画
-     * @param modifier Modifier
      */
     @Composable
-    fun Screen(
-        modifier: Modifier = Modifier
-    ){
+    fun Screen(){
         val navController = rememberNavController()
         val items = listOf(
             BottomNavigationItem(
