@@ -1,4 +1,4 @@
-from firestore.firestore_api import FirestoreAPI
+from api.firestore.firestore_api import FirestoreAPI
 from article.ArticleDataClass import Article
 
 class ArticleRepository:
