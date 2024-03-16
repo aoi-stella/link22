@@ -1,5 +1,8 @@
 import feedparser
-import pprint
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
 
 url = "https://feeds.feedburner.com/TheHackersNews"
 
@@ -41,5 +44,11 @@ def get_article(url: str) -> list[Article]:
    
 # エントリーポイント
 if __name__ == "__main__":
+   cred = credentials.Certificate("../key/firebase-key.json")
+   firebase_admin.initialize_app(cred)
    articles = get_article(url)
    print(articles[0].title)
+   db = firestore.client()
+   docs = db.collection('users').get()
+   for doc in docs:
+      print(doc.to_dict())
