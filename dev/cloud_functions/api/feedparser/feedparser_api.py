@@ -1,6 +1,6 @@
 import feedparser
 
-class FeedParser:
+class FeedParserAPI:
     def __init__(self, url: str):
         """コンストラクタ
 
