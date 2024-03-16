@@ -1,3 +1,6 @@
+#secret key
+dev/key/
+
 # Gradle files
 .gradle/
 build/
