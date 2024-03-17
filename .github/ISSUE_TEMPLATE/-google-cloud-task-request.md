@@ -1,10 +1,10 @@
 ---
-name: "【Google Cloud】Feature request"
+name: "【Google Cloud】Task request"
 about: Suggest an idea for this project
 title: "【Google Cloud】Title"
-labels: enhancement
+labels: todo
 assignees: ''
 
 ---
 
-# ✔機能追加内容
+# ✔タスク内容
