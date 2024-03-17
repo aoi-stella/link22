@@ -25,12 +25,10 @@ def __setupAritcleFetcher() -> ArticleFetcher:
 # エントリーポイント
 if __name__ == "__main__":
    
-   articles = []
    articleRepository = __setupArticleRepository()
    articleFetcher = __setupAritcleFetcher()
+   
    feeds = articleFetcher.fetch()
    for article in feeds['entries']:
-      articles.append(Article(article['title'], article['link'], article['summary']))
-   # 記事をリストへ追加する
-   #articleRepository.save(Article(article['title'], article['link'], article['summary']))
-   exit(0)
+      # 記事をリストへ追加する
+      articleRepository.save(Article(article['title'], article['link'], article['summary']))
