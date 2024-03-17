@@ -75,6 +75,27 @@ object FirebaseAPI {
     }
 
     /**
+     * コレクション内の全てのドキュメントを読み取る
+     *
+     * @param collectionName コレクション名
+     * @param callback 読み取り結果を受け取るコールバック
+     */
+    fun readAllDocument(collectionName: String, callback: (Result<List<Map<String, Any>>>) -> Unit) {
+        db.collection(collectionName)
+            .get()
+            //読み取りに成功した場合
+            .addOnSuccessListener { documents ->
+                //読み取り結果を返却する
+                callback(Result.success(documents.map { it.data }))
+            }
+            //読み取りに失敗した場合
+            .addOnFailureListener { e ->
+                //例外を返却する
+                callback(Result.failure(e))
+            }
+    }
+
+    /**
      * ドキュメントを更新する
      *
      * @param collectionName コレクション名
