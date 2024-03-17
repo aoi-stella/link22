@@ -13,8 +13,14 @@ import com.google.firebase.firestore.FirebaseFirestore
  */
 object FirebaseAPI {
     //dbのインスタンス
-    private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var db: FirebaseFirestore
 
+    /**
+     * インスタンスを初期化する
+     */
+    fun init(){
+        db = FirebaseFirestore.getInstance()
+    }
     /**
      * ドキュメントを作成する
      *

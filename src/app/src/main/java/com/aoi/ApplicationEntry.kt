@@ -1,6 +1,7 @@
-package com.aoi;
+package com.aoi
 
 import android.app.Application
+import com.aoi.data.api.firebase.FirebaseAPI
 import com.google.firebase.FirebaseApp
 
 /**
@@ -11,7 +12,8 @@ import com.google.firebase.FirebaseApp
 class ApplicationEntry: Application() {
     override fun onCreate() {
         super.onCreate()
-        // Firebase の明示的な初期化
+        // Firebase初期化
         FirebaseApp.initializeApp(this)
+        FirebaseAPI.init()
     }
 }
