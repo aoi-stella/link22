@@ -64,10 +64,12 @@ fun ArticleCard() {
             fontSize = 16.sp,
             modifier = Modifier.padding(10.dp, 10.dp, 0.dp, 0.dp),
         )
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(top = 10.dp)){
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 10.dp)
+        ) {
             TextWithDrawable(
                 drawableId = R.drawable.ic_calendar_16px,
                 content = "2021/10/10",
