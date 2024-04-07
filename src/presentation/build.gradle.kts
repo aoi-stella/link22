@@ -73,5 +73,13 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+    androidTestAnnotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
+    testImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+    testAnnotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
+
     implementation(project(":util"))
 }
