@@ -82,4 +82,5 @@ dependencies {
     testAnnotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
 
     implementation(project(":util"))
+    implementation(project(":domain"))
 }
