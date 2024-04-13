@@ -37,7 +37,7 @@ class TimelineRemoteDataSource(private val firebaseApi: FirebaseAPI) {
                     documents.map { document ->
                         TimelineDataClass(
                             title = document[FIREBASE_ARTICLE_TITLE_KEY] as? String ?: "",
-                            summary = document[FIREBASE_ARTICLE_SUMMARY_KEY] as? String ?: "",
+                            article = document[FIREBASE_ARTICLE_SUMMARY_KEY] as? String ?: "",
                             url = document[FIREBASE_ARTICLE_URL_KEY] as? String ?: ""
                         )
                     }

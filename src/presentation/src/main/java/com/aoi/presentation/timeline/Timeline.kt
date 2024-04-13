@@ -12,6 +12,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,30 +20,66 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aoi.presentation.R
 import com.aoi.presentation.composables.text_with_drawable.TextWithDrawable
-import com.aoi.presentation.timeline.ui.theme.Link22Theme
 
 @Composable
-fun Timeline() {
+/**
+ * タイムライン画面
+ *
+ * @param vm ViewModel
+ */
+fun Timeline(
+    vm: TimeLineViewModel = viewModel()
+) {
+    //記事本数
+    val articleCount = vm.articleCount.collectAsState().value
+    //タイトルリスト
+    val titleList = vm.titleList.collectAsState().value
+    //記事リスト
+    val articleList = vm.articleList.collectAsState().value
+    //出版日リスト
+    val publishDateList = vm.publishDateList.collectAsState().value
+    //出版社リスト
+    val publisherList = vm.publisherList.collectAsState().value
+
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(25.dp),
     ) {
-        items(1) {
+        items(articleCount) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ArticleCard()
+                ArticleCard(
+                    title = titleList[it],
+                    article = articleList[it],
+                    date = publishDateList[it],
+                    publisher = publisherList[it]
+                )
             }
         }
     }
 }
 
 @Composable
-fun ArticleCard() {
+/**
+ * 記事カード
+ *
+ * @param title タイトル
+ * @param article 記事
+ * @param date 出版日
+ * @param publisher 出版社
+ */
+fun ArticleCard(
+    title: String,
+    article: String,
+    date: String,
+    publisher: String
+) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -53,14 +90,14 @@ fun ArticleCard() {
     ) {
         //タイトル
         Text(
-            text = "Third-Party ChatGPT Plugins Could Lead to Account Takeovers",
+            text = title,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(10.dp, 10.dp, 0.dp, 0.dp),
         )
         //記事
         Text(
-            text = "Cybersecurity researchers have found that third-party plugins available for OpenAI ChatGPT could act as a new attack surface for threat actors looking to gain unauthorized access to sensitive data.According to&nbsp;new research&nbsp;published by Salt Labs, security flaws found directly in ChatGPT and within the ecosystem could allow attackers to install malicious plugins without users' consent",
+            text = article,
             fontSize = 16.sp,
             modifier = Modifier.padding(10.dp, 10.dp, 0.dp, 0.dp),
         )
@@ -70,15 +107,17 @@ fun ArticleCard() {
                 .wrapContentHeight()
                 .padding(top = 10.dp)
         ) {
+            //出版日
             TextWithDrawable(
                 drawableId = R.drawable.ic_calendar_16px,
-                content = "2021/10/10",
+                content = date,
                 modifier = Modifier.padding(start = 10.dp)
             )
+            //出版社
             TextWithDrawable(
                 drawableId = R.drawable.verified_user_16px,
                 drawableTInt = Color.Cyan,
-                content = "The Hacker News",
+                content = publisher,
                 modifier = Modifier.padding(start = 20.dp)
             )
         }
@@ -88,7 +127,12 @@ fun ArticleCard() {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    Link22Theme {
-        Timeline()
-    }
+    /*Link22Theme {
+        Timeline(
+            title = "Third-Party ChatGPT Plugins Could Lead to Account Takeovers",
+            article = "Cybersecurity researchers have found that third-party plugins available for OpenAI ChatGPT could act as a new attack surface for threat actors looking to gain unauthorized access to sensitive data.According to&nbsp;new research&nbsp;published by Salt Labs, security flaws found directly in ChatGPT and within the ecosystem could allow attackers to install malicious plugins without users' consent",
+            date = "2021/10/10",
+            publisher = "The Hacker News"
+        )
+    }*/
 }

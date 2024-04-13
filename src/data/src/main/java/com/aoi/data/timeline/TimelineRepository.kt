@@ -1,5 +1,7 @@
 package com.aoi.data.timeline
 
+import com.aoi.data.api.firebase.FirebaseAPI
+
 /**
  * Timeline画面用のリポジトリ
  *
@@ -7,8 +9,8 @@ package com.aoi.data.timeline
  * @property timelineRemoteDataSource リモートデータソース
  */
 class TimeLineRepository(
-    private val timelineLocalDataSource: TimelineLocalDataSource,
-    private val timelineRemoteDataSource: TimelineRemoteDataSource
+    private val timelineLocalDataSource: TimelineLocalDataSource = TimelineLocalDataSource(),
+    private val timelineRemoteDataSource: TimelineRemoteDataSource = TimelineRemoteDataSource(FirebaseAPI)
 ) {
 
     /**
