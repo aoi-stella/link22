@@ -44,14 +44,12 @@ class TimeLineViewModel(
         viewModelScope.launch {
             try{
                 val articles = useCase.fetchArticles()
-                _articleCount.value = articles!!.size
+                _articleCount.value = articles.size
                 articles.forEach {
                     _titleList.value += it.title
                     _articleList.value += it.article
-                    //TODO: 日付を取得できるようにすること
-                    _publishDateList.value += "2024/4/14"
-                    //TODO: 出版社を取得できるようにすること
-                    _publisherList.value += "The Hacker News"
+                    _publishDateList.value += it.publishDate
+                    _publisherList.value += it.publisher
                 }
             }
             catch (e: Exception){

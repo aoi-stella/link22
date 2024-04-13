@@ -6,6 +6,9 @@ package com.aoi.data.timeline
  * @param title タイトル
  * @param article 要約
  * @param url URL
+ * @param publishDate 出版日
+ * @param publisher 出版社
+ * @param publishFrom RSSのURL
  */
 data class TimelineDataClass(
     //タイトル
@@ -13,5 +16,11 @@ data class TimelineDataClass(
     //要約
     val article: String,
     //URL
-    val url: String
+    val url: String,
+    //出版日
+    val publishDate: String,
+    //出版社
+    val publisher: String,
+    //RSSのURL
+    val publishFrom: String
 )
