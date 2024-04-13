@@ -1,5 +1,6 @@
 from api.firestore.firestore_api import FirestoreAPI
 from article.ArticleDataClass import Article
+from datetime import datetime
 
 class ArticleRepository:
     # コレクション名
@@ -19,6 +20,17 @@ class ArticleRepository:
         Args:
             article (Article): 記事データ
         """
+        #TODO: 参照先のURLをどこかで共通化したいな
+        publisher_name_dict = {
+            "https://feeds.feedburner.com/TheHackersNews":"TheHackersNews",
+            "url1":"publisher1",
+            "url2":"publisher2",
+            "url3":"publisher3",
+            "url4":"publisher4",
+        }
+        article.publisher = publisher_name_dict[article.publishFrom]
+        date_obj = datetime.strptime(article.publishDate, '%a, %d %b %Y %H:%M:%S %z')
+        article.publishDate = date_obj.strftime('%Y/%m/%d')
         self.firestore_api.create(self.COLLECTION_NAME, article.__dict__)
 
     def get(self, article_id: str) -> Article:
