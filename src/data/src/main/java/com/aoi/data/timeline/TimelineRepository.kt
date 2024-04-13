@@ -6,7 +6,7 @@ package com.aoi.data.timeline
  * @property timelineLocalDataSource ローカルデータソース
  * @property timelineRemoteDataSource リモートデータソース
  */
-class TimelineRepository(
+class TimeLineRepository(
     private val timelineLocalDataSource: TimelineLocalDataSource,
     private val timelineRemoteDataSource: TimelineRemoteDataSource
 ) {
