@@ -4,6 +4,7 @@ import com.aoi.data.api.firebase.FirebaseAPI
 
 /**
  * Timeline画面用のリポジトリ
+ * as Model
  *
  * @property timelineLocalDataSource ローカルデータソース
  * @property timelineRemoteDataSource リモートデータソース

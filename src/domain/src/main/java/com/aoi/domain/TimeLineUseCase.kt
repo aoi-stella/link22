@@ -5,6 +5,7 @@ import com.aoi.data.timeline.TimelineDataClass
 
 /**
  * Timeline画面用のUseCaseクラス
+ * as Model
  */
 class TimeLineUseCase(
     private val repos: TimeLineRepository = TimeLineRepository(),

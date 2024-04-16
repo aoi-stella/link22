@@ -2,6 +2,7 @@ package com.aoi.domain
 
 /**
  * TimeLine画面用のユースケース例外クラス
+ * as Model
  */
 object TimeLineUseCaseException {
     const val GET_ARTICLES_FAILED = "記事の取得に失敗しました"

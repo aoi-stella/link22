@@ -2,6 +2,7 @@ package com.aoi.data.timeline
 
 /**
  * タイムラインのデータクラス
+ * as Model
  *
  * @param title タイトル
  * @param article 要約

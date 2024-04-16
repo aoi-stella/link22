@@ -1,5 +1,6 @@
 package com.aoi.presentation.timeline
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aoi.domain.TimeLineUseCase
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Timeline画面用のViewModelクラス
+ * as ViewModel
  *
  * @param useCase TimeLine画面のユースケースクラス
  */
@@ -57,6 +59,7 @@ class TimeLineViewModel(
                     _articleList.value += it.article
                     _publishDateList.value += it.publishDate
                     _publisherList.value += it.publisher
+                    _urlList.value += it.url
                 }
             }
             catch (e: Exception){

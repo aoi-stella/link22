@@ -29,6 +29,7 @@ import com.aoi.presentation.composables.text_with_drawable.TextWithDrawable
 @Composable
 /**
  * タイムライン画面
+ * as View
  *
  * @param vm ViewModel
  */
@@ -116,7 +117,7 @@ fun ArticleCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = 10.dp)
+                .padding(top = 25.dp, bottom = 25.dp)
         ) {
             //出版日
             TextWithDrawable(

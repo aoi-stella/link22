@@ -6,6 +6,7 @@ import kotlin.coroutines.suspendCoroutine
 
 /**
  * Timeline画面用のリモートデータソースクラス
+ * as Model
  *
  * @param firebaseApi FirebaseAPI
  */
