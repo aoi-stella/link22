@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
  *
  * @param useCase TimeLine画面のユースケースクラス
  */
-class TimeLineViewModel(
+class ViewModel(
     private val useCase: TimeLineUseCase = TimeLineUseCase()
 ): ViewModel() {
     //記事本数

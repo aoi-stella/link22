@@ -34,7 +34,7 @@ import com.aoi.presentation.composables.text_with_drawable.TextWithDrawable
  * @param vm ViewModel
  */
 fun Timeline(
-    vm: TimeLineViewModel = viewModel()
+    vm: ViewModel = viewModel()
 ) {
     //記事本数
     val articleCount = vm.articleCount.collectAsState().value
