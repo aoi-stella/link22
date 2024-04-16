@@ -7,7 +7,8 @@ import com.aoi.data.timeline.TimelineDataClass
  * Timeline画面用のUseCaseクラス
  */
 class TimeLineUseCase(
-    private val repos: TimeLineRepository = TimeLineRepository()
+    private val repos: TimeLineRepository = TimeLineRepository(),
+    // private val infra: TimelineInfrastructure = TimelineInfrastructure()
 ) {
     /**
      * 記事を取得する
@@ -29,5 +30,14 @@ class TimeLineUseCase(
          * それ以外の場合は取得した記事を返す
          */
         return result.getOrNull() ?: throw Exception(TimeLineUseCaseException.NO_ARTICLES)
+    }
+
+    /**
+     * 記事のURLを開く
+     *
+     * @param url String URL
+     */
+    fun openDetailPage(url: String){
+        // infra.openDetailPage(url)
     }
 }

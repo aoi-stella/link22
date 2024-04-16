@@ -31,6 +31,13 @@ class TimeLineViewModel(
     private val _publisherList = MutableStateFlow<List<String>>(emptyList())
     val publisherList: StateFlow<List<String>> = _publisherList
 
+    //urlリスト
+    private val _urlList = MutableStateFlow<List<String>>(emptyList())
+    val urlList: StateFlow<List<String>> = _urlList
+
+    //コンテキスト
+    private lateinit var ctx: Context
+
     //イニシャライザ
     init {
         //記事を取得する
@@ -56,5 +63,18 @@ class TimeLineViewModel(
                 //TODO: 例外処理書いてくれー。とりあえずトーストでエラーメッセージ表示
             }
         }
+    }
+
+    fun onClickedEventArticleCard(url: String){
+        useCase.openDetailPage(url)
+    }
+
+    /**
+     * コンテキストをViewから取得する
+     *
+     * @param ctx コンテキスト
+     */
+    fun setContextFromView(ctx: Context){
+        this.ctx = ctx
     }
 }

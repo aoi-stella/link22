@@ -1,5 +1,6 @@
 package com.aoi.presentation.timeline
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,6 +45,11 @@ fun Timeline(
     val publishDateList = vm.publishDateList.collectAsState().value
     //出版社リスト
     val publisherList = vm.publisherList.collectAsState().value
+    //uriリスト
+    val uriList = vm.urlList.collectAsState().value
+
+    //コンテキストセット
+    vm.setContextFromView(LocalContext.current)
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
@@ -58,7 +65,8 @@ fun Timeline(
                     title = titleList[it],
                     article = articleList[it],
                     date = publishDateList[it],
-                    publisher = publisherList[it]
+                    publisher = publisherList[it],
+                    cardClickedEvent = { vm.onClickedEventArticleCard(uriList[it]) },
                 )
             }
         }
@@ -73,12 +81,14 @@ fun Timeline(
  * @param article 記事
  * @param date 出版日
  * @param publisher 出版社
+ * @param cardClickedEvent カードクリックイベント
  */
 fun ArticleCard(
     title: String,
     article: String,
     date: String,
-    publisher: String
+    publisher: String,
+    cardClickedEvent : () -> Unit,
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -87,6 +97,7 @@ fun ArticleCard(
         modifier = Modifier
             .width(350.dp)
             .wrapContentHeight()
+            .clickable { cardClickedEvent() }
     ) {
         //タイトル
         Text(
