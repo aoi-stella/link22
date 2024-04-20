@@ -47,4 +47,14 @@ class TimeLineUseCase(
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         ctx.startActivity(intent)
     }
+
+    /**
+     * テキストを翻訳する
+     *
+     * @return String 翻訳されたテキスト
+     */
+    fun translateText(): String{
+        //TODO: 翻訳処理を実装する。Google Cloud使うかライブラリ使うか
+        return "Hello"
+    }
 }

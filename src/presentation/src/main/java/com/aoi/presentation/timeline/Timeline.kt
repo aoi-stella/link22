@@ -8,18 +8,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -68,6 +70,7 @@ fun Timeline(
                     date = publishDateList[it],
                     publisher = publisherList[it],
                     cardClickedEvent = { vm.onClickedEventArticleCard(uriList[it]) },
+                    translateClickedEvent = { vm.onClickedEventTranslateButton(it) }
                 )
             }
         }
@@ -83,6 +86,7 @@ fun Timeline(
  * @param date 出版日
  * @param publisher 出版社
  * @param cardClickedEvent カードクリックイベント
+ * @param translateClickedEvent 翻訳クリックイベント
  */
 fun ArticleCard(
     title: String,
@@ -90,6 +94,7 @@ fun ArticleCard(
     date: String,
     publisher: String,
     cardClickedEvent : () -> Unit,
+    translateClickedEvent : () -> Unit
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -115,36 +120,37 @@ fun ArticleCard(
         )
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 25.dp, bottom = 25.dp)
+            .fillMaxWidth()
+            .wrapContentHeight()
         ) {
-            //出版日
-            TextWithDrawable(
-                drawableId = R.drawable.ic_calendar_16px,
-                content = date,
-                modifier = Modifier.padding(start = 10.dp)
-            )
-            //出版社
-            TextWithDrawable(
-                drawableId = R.drawable.verified_user_16px,
-                drawableTInt = Color.Cyan,
-                content = publisher,
-                modifier = Modifier.padding(start = 20.dp)
-            )
+            Row(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .wrapContentHeight()
+                    .padding(top = 25.dp, bottom = 25.dp)
+            ) {
+                //出版日
+                TextWithDrawable(
+                    drawableId = R.drawable.ic_calendar_16px,
+                    content = date,
+                    modifier = Modifier.padding(start = 10.dp)
+                )
+                //出版社
+                TextWithDrawable(
+                    drawableId = R.drawable.verified_user_16px,
+                    content = publisher,
+                    modifier = Modifier.padding(start = 20.dp)
+                )
+            }
+            IconButton(
+                onClick = { translateClickedEvent() },
+                modifier = Modifier.padding(start = 25.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_translate_24px),
+                    contentDescription = null,
+                )
+            }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    /*Link22Theme {
-        Timeline(
-            title = "Third-Party ChatGPT Plugins Could Lead to Account Takeovers",
-            article = "Cybersecurity researchers have found that third-party plugins available for OpenAI ChatGPT could act as a new attack surface for threat actors looking to gain unauthorized access to sensitive data.According to&nbsp;new research&nbsp;published by Salt Labs, security flaws found directly in ChatGPT and within the ecosystem could allow attackers to install malicious plugins without users' consent",
-            date = "2021/10/10",
-            publisher = "The Hacker News"
-        )
-    }*/
 }

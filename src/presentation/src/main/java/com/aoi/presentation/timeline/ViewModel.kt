@@ -77,6 +77,12 @@ class ViewModel(
         useCase.openDetailPage(this.ctx, url)
     }
 
+    fun onClickedEventTranslateButton(index: Int){
+        _articleList.value = _articleList.value.toMutableList().apply {
+            this[index] = useCase.translateText()
+        }
+    }
+
     /**
      * コンテキストをViewから取得する
      *
