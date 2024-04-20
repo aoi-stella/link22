@@ -1,15 +1,19 @@
 package com.aoi.domain
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import com.aoi.data.timeline.TimeLineRepository
 import com.aoi.data.timeline.TimelineDataClass
 
 /**
  * Timeline画面用のUseCaseクラス
  * as Model
+ *
+ * TODO: DI化していきたいです
  */
 class TimeLineUseCase(
-    private val repos: TimeLineRepository = TimeLineRepository(),
-    // private val infra: TimelineInfrastructure = TimelineInfrastructure()
+    private val repos: TimeLineRepository = TimeLineRepository()
 ) {
     /**
      * 記事を取得する
@@ -38,7 +42,9 @@ class TimeLineUseCase(
      *
      * @param url String URL
      */
-    fun openDetailPage(url: String){
-        // infra.openDetailPage(url)
+    fun openDetailPage(ctx: Context,url: String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ctx.startActivity(intent)
     }
 }

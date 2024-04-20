@@ -1,5 +1,6 @@
 package com.aoi.presentation.timeline
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -38,6 +39,7 @@ class ViewModel(
     val urlList: StateFlow<List<String>> = _urlList
 
     //コンテキスト
+    @SuppressLint("StaticFieldLeak")
     private lateinit var ctx: Context
 
     //イニシャライザ
@@ -68,8 +70,11 @@ class ViewModel(
         }
     }
 
+    /**
+     * 記事カードがクリックされた時の処理
+     */
     fun onClickedEventArticleCard(url: String){
-        useCase.openDetailPage(url)
+        useCase.openDetailPage(this.ctx, url)
     }
 
     /**
