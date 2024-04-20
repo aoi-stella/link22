@@ -58,7 +58,7 @@ class ViewModel(
                 _articleCount.value = articles.size
                 articles.forEach {
                     _titleList.value += it.title
-                    _articleList.value += it.article
+                    _articleList.value += it.article.replace("&nbsp;", " ")
                     _publishDateList.value += it.publishDate
                     _publisherList.value += it.publisher
                     _urlList.value += it.url
