@@ -51,10 +51,10 @@ private fun AppSection(){
         .background(color = MaterialTheme.colorScheme.background)
     ){
         //セクション名
-        displayTitle("アプリケーション")
+        DisplayTitle("アプリケーション")
         DisplayItem(ImageVector.vectorResource(R.drawable.ic_apps_24px), "バージョン", "1.0.0")
 
-        displayTitle("連絡先")
+        DisplayTitle("連絡先")
         DisplayItem(ImageVector.vectorResource(R.drawable.ic_develop_24px), "開発者", "aoi")
         DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "X", "@aoi_sec")
         DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "Instagram", "@aoi.sec")
@@ -68,7 +68,7 @@ private fun AppSection(){
  * @param text String
  */
 @Composable
-private fun displayTitle(text:String){
+private fun DisplayTitle(text:String){
     Text(
         modifier = Modifier.padding(top = 24.dp),
         text = text,
