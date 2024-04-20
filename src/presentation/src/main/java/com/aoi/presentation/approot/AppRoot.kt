@@ -3,14 +3,12 @@ package com.aoi.presentation.approot
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
@@ -19,7 +17,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -133,14 +130,14 @@ class AppRootActivity : ComponentActivity() {
                     )
                 }
             },
-            navigationIcon = {
+            /*navigationIcon = {
                 //TODO: 若干アイコン左側過ぎない？
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = "Navigation Icon",
                     modifier = Modifier.clickable(enabled = false, onClick = {})
                 )
-            }
+            }*/
         )
     }
 
@@ -164,9 +161,6 @@ class AppRootActivity : ComponentActivity() {
             items.forEach {
                     item ->
                 NavigationBarItem(
-                    colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = MaterialTheme.colorScheme.primary,
-                    ),
                     selected = currentRoute == item.route,
                     onClick = {
                         navController.navigate(item.route){
