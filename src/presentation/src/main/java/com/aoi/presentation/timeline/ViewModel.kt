@@ -77,6 +77,9 @@ class ViewModel(
         useCase.openDetailPage(this.ctx, url)
     }
 
+    /**
+     * 翻訳ボタンがクリックされた時の処理
+     */
     fun onClickedEventTranslateButton(index: Int){
         _articleList.value = _articleList.value.toMutableList().apply {
             this[index] = useCase.translateText()

@@ -2,16 +2,21 @@ package com.aoi.presentation.timeline
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -54,25 +59,41 @@ fun Timeline(
     //コンテキストセット
     vm.setContextFromView(LocalContext.current)
 
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(25.dp),
-    ) {
-        items(articleCount) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                ArticleCard(
-                    title = titleList[it],
-                    article = articleList[it],
-                    date = publishDateList[it],
-                    publisher = publisherList[it],
-                    cardClickedEvent = { vm.onClickedEventArticleCard(uriList[it]) },
-                    translateClickedEvent = { vm.onClickedEventTranslateButton(it) }
-                )
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ){
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(25.dp),
+        ) {
+            items(articleCount) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    ArticleCard(
+                        //各リストの要素を取得
+                        title = titleList[it],
+                        article = articleList[it],
+                        date = publishDateList[it],
+                        publisher = publisherList[it],
+                        cardClickedEvent = { vm.onClickedEventArticleCard(uriList[it]) },
+                        translateClickedEvent = { vm.onClickedEventTranslateButton(it) }
+                    )
+                }
             }
+        }
+        FloatingActionButton(
+            onClick = { /* フローティングボタンのクリックアクション */ },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "Add"
+            )
         }
     }
 }
