@@ -81,6 +81,7 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.51.1")
     testAnnotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
 
+    // Multi Module
     implementation(project(":util"))
     implementation(project(":domain"))
 }
