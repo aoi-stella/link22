@@ -1,5 +1,10 @@
 from api.feedparser.feedparser_api import FeedParserAPI
 
+"""記事取得クラス
+
+rssフィードサイトから実際にフィードをを取得するクラス。
+取得した記事の保存は呼び元で行うこととする。
+"""
 class ArticleFetcher:
     def __init__(self, feedparser_api: FeedParserAPI) -> None:
         """コンストラクタ

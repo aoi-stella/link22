@@ -2,6 +2,11 @@ from api.firestore.firestore_api import FirestoreAPI
 from article.ArticleDataClass import Article
 from datetime import datetime
 
+"""記事データ操作クラス
+
+firestore内に保存されているコレクションに対するCRUD操作を行うクラス。
+RSSフィードから実際に取得する処理はArticleFetcherクラスで行うこととする。
+"""
 class ArticleRepository:
     # コレクション名
     COLLECTION_NAME = 'articles'
