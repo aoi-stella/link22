@@ -54,3 +54,13 @@ class FirestoreAPI:
             document_id (any): 削除するドキュメントid
         """
         self.db.collection(collection).document(document_id).delete()
+        
+    def delete_all_documents_in_collection(self, collection: any):
+        """指定したコレクション内の全ドキュメントのデータを削除する
+
+        Args:
+            collection (any): コレクション名
+        """
+        all_docs = self.db.collection(collection).stream()
+        for doc in all_docs:
+            doc.reference.delete()

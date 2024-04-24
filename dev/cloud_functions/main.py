@@ -26,7 +26,7 @@ def __setupAritcleFetcher() -> ArticleFetcher:
 def main():
    articleRepository = __setupArticleRepository()
    articleFetcher = __setupAritcleFetcher()
-   
+   articleRepository.delete_all()
    feeds = articleFetcher.fetch()
    for article in feeds['entries']:
       # 記事をリストへ追加する

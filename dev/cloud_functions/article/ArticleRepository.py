@@ -66,3 +66,8 @@ class ArticleRepository:
             article_id (str): 記事ID
         """
         self.firestore_api.delete(self.COLLECTION_NAME, article_id)
+        
+    def delete_all(self):
+        """全ての記事を削除する
+        """
+        self.firestore_api.delete_all_documents_in_collection(self.COLLECTION_NAME)
