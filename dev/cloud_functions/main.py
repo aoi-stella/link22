@@ -23,9 +23,7 @@ def __setupAritcleFetcher() -> ArticleFetcher:
    """
    return ArticleFetcher(FeedParserAPI(url))
 
-# エントリーポイント
-if __name__ == "__main__":
-   
+def main():
    articleRepository = __setupArticleRepository()
    articleFetcher = __setupAritcleFetcher()
    
@@ -39,3 +37,7 @@ if __name__ == "__main__":
          url,
          article['published'])
       )
+   
+# エントリーポイント
+if __name__ == "__main__":
+   main()
