@@ -13,7 +13,7 @@ def __setupArticleRepository() -> ArticleRepository:
    Returns:
        ArticleRepository: ArticleRepositoryのインスタンス
    """
-   return ArticleRepository(FirestoreAPI("../key/firebase-key.json"))
+   return ArticleRepository(FirestoreAPI("./firebase-key.json"))
 
 def __setupAritcleFetcher() -> ArticleFetcher:
    """ArticleFetcherをセットアップする
@@ -23,7 +23,7 @@ def __setupAritcleFetcher() -> ArticleFetcher:
    """
    return ArticleFetcher(FeedParserAPI(url))
 
-def main():
+def main(data, context):
    articleRepository = __setupArticleRepository()
    articleFetcher = __setupAritcleFetcher()
    articleRepository.delete_all()
