@@ -78,22 +78,22 @@ class AppRootActivity : ComponentActivity() {
         val navController = rememberNavController()
         val items = listOf(
             BottomNavigationItem(
-                title = getString(R.string.nav_destination_timeline),
-                route = getString(R.string.nav_destination_timeline),
+                title = getString(R.string.nav_destination_articles),
+                route = getString(R.string.nav_destination_articles),
                 selectedIcon = Icons.Filled.Home,
                 unselectedIcon = Icons.Outlined.Home
             ),
             BottomNavigationItem(
-                title = getString(R.string.nav_destination_setting),
-                route = getString(R.string.nav_destination_setting),
+                title = getString(R.string.nav_destination_about),
+                route = getString(R.string.nav_destination_about),
                 selectedIcon = Icons.Filled.Settings,
                 unselectedIcon = Icons.Outlined.Settings)
         )
         // NavControllerの現在のバックスタックエントリをリアクティブに監視
         val currentBackStackEntry by navController.currentBackStackEntryAsState()
         val topTitle = when (currentBackStackEntry?.destination?.route) {
-            getString(R.string.nav_destination_timeline) -> getString(R.string.nav_destination_timeline)
-            getString(R.string.nav_destination_setting) -> getString(R.string.nav_destination_setting)
+            getString(R.string.nav_destination_articles) -> getString(R.string.nav_destination_articles)
+            getString(R.string.nav_destination_about) -> getString(R.string.nav_destination_about)
             else -> ""
         }
 
@@ -103,11 +103,11 @@ class AppRootActivity : ComponentActivity() {
         ){
             innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)){
-                NavHost(navController = navController, startDestination = getString(R.string.nav_destination_timeline)){
-                    composable(getString(R.string.nav_destination_timeline)){
+                NavHost(navController = navController, startDestination = getString(R.string.nav_destination_articles)){
+                    composable(getString(R.string.nav_destination_articles)){
                         Timeline()
                     }
-                    composable(getString(R.string.nav_destination_setting)){
+                    composable(getString(R.string.nav_destination_about)){
                         Settings()
                     }
                 }
