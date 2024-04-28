@@ -134,7 +134,8 @@ class AppRootActivity : ComponentActivity() {
                     Text(
                         text = title,
                         style = MaterialTheme.typography.headlineMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontWeight = MaterialTheme.typography.headlineMedium.fontWeight
                     )
                 }
             },
