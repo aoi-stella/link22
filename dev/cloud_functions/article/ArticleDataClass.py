@@ -7,7 +7,9 @@ class Article:
                 summary: str,
                 publishFrom: str,
                 publishDate: str,
-                publisher: str = ""):
+                publisher: str = "",
+                translated_title: str = "",
+                translated_summary: str = ""):
       """コンストラクタ
 
       Args:
@@ -17,6 +19,8 @@ class Article:
          publishFrom (str): 記事の発行元URL
          publishDate (str): 記事の発行日
          publisher (str, optional): 記事の発行元名 / デフォルトは""
+         translated_title (str, optional): 翻訳後のタイトル / デフォルトは""
+         translated_summary (str, optional): 翻訳後の概要 / デフォルトは""
       """
       self.title = title
       self.link = link
@@ -24,3 +28,5 @@ class Article:
       self.publishFrom = publishFrom
       self.publishDate = publishDate
       self.publisher = publisher
+      self.translated_title = translated_title
+      self.translated_summary = translated_summary

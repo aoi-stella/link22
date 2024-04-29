@@ -3,6 +3,7 @@ from article.ArticleFetcher import ArticleFetcher
 from article.ArticleRepository import ArticleRepository
 from api.firestore.firestore_api import FirestoreAPI
 from api.feedparser.feedparser_api import FeedParserAPI
+from api.cloud_translation.cloud_translation_api import CloudTranslationAPI
 
 # TODO: URLはどこかで共通化したいな
 url = "https://feeds.feedburner.com/TheHackersNews"
@@ -13,7 +14,7 @@ def __setupArticleRepository() -> ArticleRepository:
    Returns:
        ArticleRepository: ArticleRepositoryのインスタンス
    """
-   return ArticleRepository(FirestoreAPI("./firebase-key.json"))
+   return ArticleRepository(FirestoreAPI("./firebase-key.json"), CloudTranslationAPI())
 
 def __setupAritcleFetcher() -> ArticleFetcher:
    """ArticleFetcherをセットアップする

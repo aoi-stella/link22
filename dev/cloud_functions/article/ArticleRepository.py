@@ -1,4 +1,5 @@
 from api.firestore.firestore_api import FirestoreAPI
+from api.cloud_translation.cloud_translation_api import CloudTranslationAPI
 from article.ArticleDataClass import Article
 from datetime import datetime
 
@@ -11,13 +12,15 @@ class ArticleRepository:
     # コレクション名
     COLLECTION_NAME = 'articles'
     
-    def __init__(self, firestore_api: FirestoreAPI):
+    def __init__(self, firestore_api: FirestoreAPI, translation_api: CloudTranslationAPI):
         """コンストラクタ
 
         Args:
             firestore_api (FirestoreAPI): APIクラス
+            translation_api (CloudTranslationAPI): Cloud Translation APIクラス
         """
         self.firestore_api = firestore_api
+        self.translation_api = translation_api
 
     def save(self, article: Article):
         """記事を保存する
@@ -36,6 +39,8 @@ class ArticleRepository:
         article.publisher = publisher_name_dict[article.publishFrom]
         date_obj = datetime.strptime(article.publishDate, '%a, %d %b %Y %H:%M:%S %z')
         article.publishDate = date_obj.strftime('%Y/%m/%d')
+        article.translated_title = self.translation_api.translate(article.title)
+        article.translated_summary = self.translation_api.translate(article.summary)
         self.firestore_api.create(self.COLLECTION_NAME, article.__dict__)
 
     def get(self, article_id: str) -> Article:
