@@ -33,6 +33,12 @@ class TimelineRemoteDataSource(private val firebaseApi: FirebaseAPI) {
 
         // Firebaseのドキュメントキー[rssURL]
         private const val FIREBASE_ARTICLE_RSS_URL_KEY = "publishFrom"
+
+        // Firebaseのドキュメントキー[翻訳後のタイトル]
+        private const val FIREBASE_ARTICLE_TRANSLATED_TITLE_KEY = "translated_title"
+
+        // Firebaseのドキュメントキー[翻訳後の概要]
+        private const val FIREBASE_ARTICLE_TRANSLATED_SUMMARY_KEY = "translated_summary"
     }
 
     /**
@@ -51,7 +57,9 @@ class TimelineRemoteDataSource(private val firebaseApi: FirebaseAPI) {
                             url = document[FIREBASE_ARTICLE_LINK_KEY] as? String ?: "",
                             publishDate = document[FIREBASE_ARTICLE_PUBLISH_DATE_KEY] as? String ?: "",
                             publisher = document[FIREBASE_ARTICLE_PUBLISHER_KEY] as? String ?: "",
-                            publishFrom = document[FIREBASE_ARTICLE_RSS_URL_KEY] as? String ?: ""
+                            publishFrom = document[FIREBASE_ARTICLE_RSS_URL_KEY] as? String ?: "",
+                            translatedTitle = document[FIREBASE_ARTICLE_TRANSLATED_TITLE_KEY] as? String ?: "",
+                            translatedArticle = document[FIREBASE_ARTICLE_TRANSLATED_SUMMARY_KEY] as? String ?: ""
                         )
                     }
                 }

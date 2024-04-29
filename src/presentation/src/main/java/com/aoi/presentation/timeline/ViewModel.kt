@@ -21,10 +21,18 @@ class ViewModel(
     //記事本数
     private val _articleCount = MutableStateFlow(0)
     val articleCount: StateFlow<Int> = _articleCount
-    //タイトルリスト
+    //原文のタイトルリスト
+    private val _originTitleList = MutableStateFlow<List<String>>(emptyList())
+    //翻訳後のタイトルリスト
+    private val _translatedTitleList = MutableStateFlow<List<String>>(emptyList())
+    //表示するタイトルリスト
     private val _titleList = MutableStateFlow<List<String>>(emptyList())
     val titleList: StateFlow<List<String>> = _titleList
-    //記事リスト
+    //原文の記事リスト
+    private val _originArticleList = MutableStateFlow<List<String>>(emptyList())
+    //翻訳後の記事リスト
+    private val _translatedArticleList = MutableStateFlow<List<String>>(emptyList())
+    //表示する記事リスト
     private val _articleList = MutableStateFlow<List<String>>(emptyList())
     val articleList: StateFlow<List<String>> = _articleList
     //出版日リスト
@@ -33,7 +41,6 @@ class ViewModel(
     //出版社リスト
     private val _publisherList = MutableStateFlow<List<String>>(emptyList())
     val publisherList: StateFlow<List<String>> = _publisherList
-
     //urlリスト
     private val _urlList = MutableStateFlow<List<String>>(emptyList())
     val urlList: StateFlow<List<String>> = _urlList
@@ -41,6 +48,9 @@ class ViewModel(
     //コンテキスト
     @SuppressLint("StaticFieldLeak")
     private lateinit var ctx: Context
+
+    //翻訳フラグ
+    private var translateToJA: Boolean = true
 
     //イニシャライザ
     init {
@@ -57,11 +67,15 @@ class ViewModel(
                 val articles = useCase.fetchArticles()
                 _articleCount.value = articles.size
                 articles.forEach {
+                    _originTitleList.value += it.title
                     _titleList.value += it.title
                     _articleList.value += it.article.replace("&nbsp;", " ")
+                    _originArticleList.value += it.article.replace("&nbsp;", " ")
                     _publishDateList.value += it.publishDate
                     _publisherList.value += it.publisher
                     _urlList.value += it.url
+                    _translatedTitleList.value += it.translatedTitle
+                    _translatedArticleList.value += it.translatedArticle
                 }
             }
             catch (e: Exception){
@@ -79,10 +93,31 @@ class ViewModel(
 
     /**
      * 翻訳ボタンがクリックされた時の処理
+     * @param index クリックされた記事のインデックス
      */
     fun onClickedEventTranslateButton(index: Int){
+        val dstTitleList: List<String>
+        val dstArticleList: List<String>
+
+        // 日本語→英語の場合
+        if(!translateToJA){
+            dstTitleList = _originTitleList.value
+            dstArticleList = _originArticleList.value
+            translateToJA = true
+        }
+        // 英語→日本語の場合
+        else{
+            dstTitleList = _translatedTitleList.value
+            dstArticleList = _translatedArticleList.value
+            translateToJA = false
+        }
+
+        // タイトルと記事を更新
+        _titleList.value = _titleList.value.toMutableList().apply {
+            this[index] = dstTitleList[index]
+        }
         _articleList.value = _articleList.value.toMutableList().apply {
-            this[index] = useCase.translateText()
+            this[index] = dstArticleList[index]
         }
     }
 
