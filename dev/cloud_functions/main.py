@@ -36,7 +36,8 @@ def main(data, context):
          article['link'],
          article['summary'],
          url,
-         article['published'])
+         article['published'],
+         article['links'][1]['href'])
       )
    
 # エントリーポイント
