@@ -81,9 +81,6 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.51.1")
     testAnnotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
 
-    // Coin
-    implementation("io.coil-kt:coil:2.6.0")
-
     // Multi Module
     implementation(project(":util"))
     implementation(project(":domain"))
