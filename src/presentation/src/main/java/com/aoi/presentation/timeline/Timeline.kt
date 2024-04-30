@@ -7,16 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -27,9 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.aoi.presentation.R
 import com.aoi.presentation.composables.text_with_drawable.TextWithDrawable
 
@@ -55,6 +55,8 @@ fun Timeline(
     val publisherList = vm.publisherList.collectAsState().value
     //uriリスト
     val uriList = vm.urlList.collectAsState().value
+    //サムネイル画像パスリスト
+    val thumbnailImagePathList = vm.thumbnailImagePathList.collectAsState().value
 
     //コンテキストセット
     vm.setContextFromView(LocalContext.current)
@@ -78,6 +80,7 @@ fun Timeline(
                         article = articleList[it],
                         date = publishDateList[it],
                         publisher = publisherList[it],
+                        thumbnailImageUri = thumbnailImagePathList[it],
                         cardClickedEvent = { vm.onClickedEventArticleCard(uriList[it]) },
                         translateClickedEvent = { vm.onClickedEventTranslateButton(it) }
                     )
@@ -95,6 +98,7 @@ fun Timeline(
  * @param article 記事
  * @param date 出版日
  * @param publisher 出版社
+ * @param thumbnailImageUri サムネイル画像URI
  * @param cardClickedEvent カードクリックイベント
  * @param translateClickedEvent 翻訳クリックイベント
  */
@@ -103,6 +107,7 @@ fun ArticleCard(
     article: String,
     date: String,
     publisher: String,
+    thumbnailImageUri: String,
     cardClickedEvent : () -> Unit,
     translateClickedEvent : () -> Unit
 ) {
@@ -115,6 +120,7 @@ fun ArticleCard(
             .wrapContentHeight()
             .clickable { cardClickedEvent() }
     ) {
+        ThumbnailImage(thumbnailImageUri)
         //タイトル
         Text(
             text = title,
@@ -163,4 +169,37 @@ fun ArticleCard(
             }
         }
     }
+}
+
+/**
+ * サムネイル画像の描画
+ * @param url 画像のURL
+ */
+@Composable
+fun ThumbnailImage(url: String) {
+    AsyncImage(
+        model = url,
+        contentDescription = null,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .padding(10.dp)
+    )
+}
+
+/**
+ * タイムライン画面のプレビュー
+ */
+@Preview
+@Composable
+fun PreviewArticleCard() {
+    ArticleCard(
+        title = "Researchers Detail Multistage Attack Hijacking Systems with SSLoad, Cobalt Strike",
+        article = "Cybersecurity researchers have discovered an ongoing attack campaign&nbsp;that's&nbsp;leveraging phishing emails to deliver a malware called SSLoad.The campaign, codenamed&nbsp;FROZEN#SHADOW&nbsp;by Securonix, also involves&nbsp;the deployment of&nbsp;Cobalt Strike and the ConnectWise ScreenConnect remote desktop software.\"SSLoad is designed to stealthily infiltrate systems, gather sensitive",
+        date = "2024/04/24",
+        publisher = "TheHackersNews",
+        thumbnailImageUri = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhH1bEFQuUUnkFd5aJJzA0-_GeF9ciA5uY4iOf4gb7sJD_azqgIvlCw850DISUSIsP2TIus9AFy9KKFZSRgzFzJeB6KpIR9f0ttNsPYZiNILooejl8n2rVGQVziOWkf-9i2xtdx55PFylzHAGwMPp-H7vi9PCouncZWA0wY5B2VmBK1UtQxdkWy1vB7jfV5/s1600/hacke.png",
+        cardClickedEvent = {},
+        translateClickedEvent = {}
+    )
 }

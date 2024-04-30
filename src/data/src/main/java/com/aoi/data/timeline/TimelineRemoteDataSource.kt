@@ -39,6 +39,9 @@ class TimelineRemoteDataSource(private val firebaseApi: FirebaseAPI) {
 
         // Firebaseのドキュメントキー[翻訳後の概要]
         private const val FIREBASE_ARTICLE_TRANSLATED_SUMMARY_KEY = "translated_summary"
+
+        // Firebaseのドキュメントキー[サムネイル画像パス]
+        private const val FIREBASE_ARTICLE_THUMBNAIL_IMAGE_PATH_KEY = "thumbnailPath"
     }
 
     /**
@@ -59,7 +62,8 @@ class TimelineRemoteDataSource(private val firebaseApi: FirebaseAPI) {
                             publisher = document[FIREBASE_ARTICLE_PUBLISHER_KEY] as? String ?: "",
                             publishFrom = document[FIREBASE_ARTICLE_RSS_URL_KEY] as? String ?: "",
                             translatedTitle = document[FIREBASE_ARTICLE_TRANSLATED_TITLE_KEY] as? String ?: "",
-                            translatedArticle = document[FIREBASE_ARTICLE_TRANSLATED_SUMMARY_KEY] as? String ?: ""
+                            translatedArticle = document[FIREBASE_ARTICLE_TRANSLATED_SUMMARY_KEY] as? String ?: "",
+                            thumbnailImagePath = document[FIREBASE_ARTICLE_THUMBNAIL_IMAGE_PATH_KEY] as? String ?: ""
                         )
                     }
                 }

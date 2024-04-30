@@ -44,6 +44,9 @@ class ViewModel(
     //urlリスト
     private val _urlList = MutableStateFlow<List<String>>(emptyList())
     val urlList: StateFlow<List<String>> = _urlList
+    //サムネイル画像パスリスト
+    private val _thumbnailImagePathList = MutableStateFlow<List<String>>(emptyList())
+    val thumbnailImagePathList: StateFlow<List<String>> = _thumbnailImagePathList
 
     //コンテキスト
     @SuppressLint("StaticFieldLeak")
@@ -76,6 +79,7 @@ class ViewModel(
                     _urlList.value += it.url
                     _translatedTitleList.value += it.translatedTitle
                     _translatedArticleList.value += it.translatedArticle
+                    _thumbnailImagePathList.value += it.thumbnailImagePath
                 }
             }
             catch (e: Exception){

@@ -12,6 +12,7 @@ package com.aoi.data.timeline
  * @param publishFrom RSSのURL
  * @param translatedTitle 翻訳後のタイトル
  * @param translatedArticle 翻訳後の要約
+ * @param thumbnailImagePath サムネイル画像パス
  */
 data class TimelineDataClass(
     //タイトル
@@ -29,5 +30,7 @@ data class TimelineDataClass(
     //翻訳後のタイトル
     val translatedTitle: String,
     //翻訳後の要約
-    val translatedArticle: String
+    val translatedArticle: String,
+    //サムネイル画像パス
+    val thumbnailImagePath: String
 )
