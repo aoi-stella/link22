@@ -39,3 +39,31 @@ class BigQueryAPI:
         if errors:
             raise RuntimeError(f"Failed to insert rows to BigQuery: {errors}")
         print(f"Inserted rows into table {table_id}")
+        
+    def clear_table(self, table_id):
+        # テーブルIDを完全修飾で定義する
+        table_id = f"{self.dataset_id}.{table_id}"
+        
+        # テーブルの内容をすべて削除するクエリを実行する
+        query = f"DELETE FROM `{table_id}` WHERE TRUE"
+        job = self.client.query(query)
+        
+    def classify_articles(self, project_id, table_id):
+        client = bigquery.Client(project=project_id)
+        dataset_id = f"{project_id}.dataset"
+        table_with_tags_id = f"{dataset_id}.{table_id}_with_tags"
+        
+        query = f"""
+        CREATE OR REPLACE TABLE `{table_with_tags_id}` AS
+        SELECT
+        contents,
+        CASE
+            WHEN contents LIKE '%exploit%' THEN 'Exploit'
+            WHEN contents LIKE '%漏洩%' THEN '事件'
+            ELSE 'その他'
+        END AS tags
+        FROM
+        `{dataset_id}.{table_id}`
+        """
+        
+        job = client.query(query)
