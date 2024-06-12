@@ -67,3 +67,15 @@ class BigQueryAPI:
         """
         
         job = client.query(query)
+        
+    def fetch_tagged_data(self, table_id):
+        table_with_tags_id = f"{self.dataset_id}.{table_id}_with_tags"
+        query = f"SELECT * FROM `{table_with_tags_id}`"
+        query_job = self.client.query(query)
+        results = query_job.result()
+        
+        data = []
+        for row in results:
+            data.append({"contents": row["contents"], "tags": row["tags"]})
+        
+        return data

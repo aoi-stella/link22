@@ -29,6 +29,7 @@ def __setupBq(projectId: str) -> BigQueryAPI:
    return BigQueryAPI(projectId)
 
 def main(data = None, context = None):
+   articles = []
    PROJECT_ID = "link22-dev-01"
    articleRepository = __setupArticleRepository()
    articleFetcher = __setupAritcleFetcher()
@@ -45,15 +46,22 @@ def main(data = None, context = None):
          url,
          article['published'],
          article['links'][1]['href'])
-      
       newData = [
          {"contents": article.summary }
       ]
-      # 記事をリストへ追加する
-      articleRepository.save(newArticle)
+      articles.append(newArticle)
       # bqへ記事データを追加
       bqApi.insert_to_row("articles_tag_tbl", newData)
    bqApi.classify_articles(PROJECT_ID, "articles_tag_tbl")
+   tag_list = bqApi.fetch_tagged_data("articles_tag_tbl")
+      
+   i = 50
+   for article in articles:
+      article.tag = tag_list[i]['tags']
+      i -= 1
+      # 記事をリストへ追加する
+      articleRepository.save(article)
+   print("")
    
 # エントリーポイント
 if __name__ == "__main__":

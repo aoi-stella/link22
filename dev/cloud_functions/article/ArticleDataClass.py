@@ -10,7 +10,8 @@ class Article:
                 thumbnailPath: str,
                 publisher: str = "",
                 translated_title: str = "",
-                translated_summary: str = ""):
+                translated_summary: str = "",
+                tag: str = "etc"):
       """コンストラクタ
 
       Args:
@@ -23,6 +24,7 @@ class Article:
          publisher (str, optional): 記事の発行元名 / デフォルトは""
          translated_title (str, optional): 翻訳後のタイトル / デフォルトは""
          translated_summary (str, optional): 翻訳後の概要 / デフォルトは""
+         tag (str, optional): タグ / デフォルトは"etc"
       """
       self.title = title
       self.link = link
@@ -33,3 +35,4 @@ class Article:
       self.publisher = publisher
       self.translated_title = translated_title
       self.translated_summary = translated_summary
+      self.tag = tag
