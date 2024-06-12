@@ -1,43 +1,36 @@
 package com.aoi.presentation.composables.text_with_drawable
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aoi.presentation.R
 
 @Composable
 fun TextWithDrawable(
-    drawableId: Int,
-    drawableTInt: Color = Color.Unspecified,
+    title: String,
     content: String,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier.wrapContentWidth()
     ){
-        Icon(
-            painter = painterResource(id = drawableId),
-            contentDescription = null,
-            tint = drawableTInt,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
+        Text(
+            text = title,
+            fontSize = 16.sp,
+            modifier = Modifier.align(Alignment.CenterVertically),
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             text = content,
-            fontSize = 12.sp,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(start = 5.dp),
+            fontSize = 16.sp,
+            modifier = Modifier.align(Alignment.CenterVertically),
             textAlign = TextAlign.Center
         )
     }

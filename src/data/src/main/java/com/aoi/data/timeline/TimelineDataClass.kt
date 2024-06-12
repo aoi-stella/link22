@@ -13,6 +13,7 @@ package com.aoi.data.timeline
  * @param translatedTitle 翻訳後のタイトル
  * @param translatedArticle 翻訳後の要約
  * @param thumbnailImagePath サムネイル画像パス
+ * @param tag タグ
  */
 data class TimelineDataClass(
     //タイトル
@@ -32,5 +33,7 @@ data class TimelineDataClass(
     //翻訳後の要約
     val translatedArticle: String,
     //サムネイル画像パス
-    val thumbnailImagePath: String
+    val thumbnailImagePath: String,
+    //タグ
+    val tag: String
 )

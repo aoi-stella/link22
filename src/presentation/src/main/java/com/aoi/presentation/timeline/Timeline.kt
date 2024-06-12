@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,24 +14,24 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.aoi.presentation.R
 import com.aoi.presentation.composables.text_with_drawable.TextWithDrawable
 
 @Composable
@@ -57,6 +58,8 @@ fun Timeline(
     val uriList = vm.urlList.collectAsState().value
     //サムネイル画像パスリスト
     val thumbnailImagePathList = vm.thumbnailImagePathList.collectAsState().value
+    //タグリスト
+    val tagList = vm.tagList.collectAsState().value
 
     //コンテキストセット
     vm.setContextFromView(LocalContext.current)
@@ -81,6 +84,7 @@ fun Timeline(
                         date = publishDateList[it],
                         publisher = publisherList[it],
                         thumbnailImageUri = thumbnailImagePathList[it],
+                        tag = tagList[it],
                         cardClickedEvent = { vm.onClickedEventArticleCard(uriList[it]) },
                         translateClickedEvent = { vm.onClickedEventTranslateButton(it) }
                     )
@@ -108,6 +112,7 @@ fun ArticleCard(
     date: String,
     publisher: String,
     thumbnailImageUri: String,
+    tag: String,
     cardClickedEvent : () -> Unit,
     translateClickedEvent : () -> Unit
 ) {
@@ -136,36 +141,57 @@ fun ArticleCard(
         )
         Row(
             modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+                .fillMaxWidth()
+                .wrapContentHeight()
         ) {
-            Row(
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .wrapContentHeight()
-                    .padding(top = 25.dp, bottom = 25.dp)
-            ) {
-                //出版日
+            Column(modifier = Modifier.padding(start = 20.dp)) {
+                Spacer(modifier = Modifier.height(20.dp))
                 TextWithDrawable(
-                    drawableId = R.drawable.ic_calendar_16px,
-                    content = date,
-                    modifier = Modifier.padding(start = 10.dp)
+                    title = "Published: ",
+                    content = date
                 )
+                Spacer(modifier = Modifier.height(10.dp))
                 //出版社
                 TextWithDrawable(
-                    drawableId = R.drawable.verified_user_16px,
-                    content = publisher,
-                    modifier = Modifier.padding(start = 20.dp)
+                    title = "Publisher: ",
+                    content = publisher
                 )
-            }
-            IconButton(
-                onClick = { translateClickedEvent() },
-                modifier = Modifier.padding(start = 25.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_translate_24px),
-                    contentDescription = null,
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "Category: ",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp)
+                    Card(
+                        shape = RoundedCornerShape(50), // 丸みを帯びた角
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .wrapContentHeight()
+                            .padding(8.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                            disabledContentColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            disabledContainerColor = MaterialTheme.colorScheme.tertiaryContainer
+                        ),
+                    ) {
+                        Text(
+                            text = tag,
+                            color = MaterialTheme.colorScheme.onPrimary, // テキストの色
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp),
+                            style = MaterialTheme.typography.bodyMedium // テキストスタイル
+                        )
+                    }
+                    Button(
+                        onClick = { translateClickedEvent() },
+                        modifier = Modifier.padding(start = 50.dp, bottom = 5.dp)
+                    ) {
+                        Text(
+                            text = "Translate",
+                            fontSize = 12.sp)
+                    }
+                }
             }
         }
     }
@@ -199,6 +225,7 @@ fun PreviewArticleCard() {
         date = "2024/04/24",
         publisher = "TheHackersNews",
         thumbnailImageUri = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhH1bEFQuUUnkFd5aJJzA0-_GeF9ciA5uY4iOf4gb7sJD_azqgIvlCw850DISUSIsP2TIus9AFy9KKFZSRgzFzJeB6KpIR9f0ttNsPYZiNILooejl8n2rVGQVziOWkf-9i2xtdx55PFylzHAGwMPp-H7vi9PCouncZWA0wY5B2VmBK1UtQxdkWy1vB7jfV5/s1600/hacke.png",
+        tag = "Exploit",
         cardClickedEvent = {},
         translateClickedEvent = {}
     )
