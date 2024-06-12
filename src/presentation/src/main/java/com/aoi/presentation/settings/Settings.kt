@@ -52,7 +52,7 @@ private fun AppSection(){
     ){
         //セクション名
         DisplayTitle("アプリケーション")
-        DisplayItem(ImageVector.vectorResource(R.drawable.ic_apps_24px), "バージョン", "1.0.0")
+        DisplayItem(ImageVector.vectorResource(R.drawable.ic_apps_24px), "バージョン", "1.0.1")
 
         DisplayTitle("連絡先")
         DisplayItem(ImageVector.vectorResource(R.drawable.ic_develop_24px), "開発者", "xxx")
