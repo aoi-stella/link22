@@ -55,10 +55,10 @@ private fun AppSection(){
         DisplayItem(ImageVector.vectorResource(R.drawable.ic_apps_24px), "バージョン", "1.0.0")
 
         DisplayTitle("連絡先")
-        DisplayItem(ImageVector.vectorResource(R.drawable.ic_develop_24px), "開発者", "aoi")
-        DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "X", "@aoi_sec")
-        DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "Instagram", "@aoi.sec")
-        DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "Email", "aoi.stella.dev@gmail.com")
+        DisplayItem(ImageVector.vectorResource(R.drawable.ic_develop_24px), "開発者", "xxx")
+        DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "X", "@xxx")
+        DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "Instagram", "@xxx")
+        DisplayItem(ImageVector.vectorResource(R.drawable.ic_contact_24px), "Email", "xxx@gmail.com")
     }
 }
 
